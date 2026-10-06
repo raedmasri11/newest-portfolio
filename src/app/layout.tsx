@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import Script from "next/script";
 import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
@@ -67,12 +68,13 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     knowsLanguage: ["Arabic", "English", "French"],
   };
 
-  const themeInitScript = `(function(){var r=document.documentElement;var saved=null;try{var value=localStorage.getItem('theme');if(value==='light'||value==='dark'){saved=value}else if(value!==null){localStorage.removeItem('theme')}}catch(e){}var systemDark=!!(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches);var resolved=saved||(systemDark?'dark':'light');r.dataset.theme=resolved;r.dataset.themeSource=saved?'manual':'system';r.classList.toggle('dark',resolved==='dark');r.style.colorScheme=resolved})();`;
+  const themeInitScript = `(function(){var r=document.documentElement;r.classList.add('theme-initializing');var saved=null;try{var value=localStorage.getItem('theme');if(value==='light'||value==='dark'){saved=value}else if(value!==null){localStorage.removeItem('theme')}}catch(e){}var systemDark=!!(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches);var resolved=saved||(systemDark?'dark':'light');r.dataset.theme=resolved;r.dataset.themeSource=saved?'manual':'system';r.classList.toggle('dark',resolved==='dark');r.style.colorScheme=resolved;r.dataset.themeReady='true';var finish=function(){r.classList.remove('theme-initializing')};if(window.requestAnimationFrame){requestAnimationFrame(function(){requestAnimationFrame(finish)})}else{setTimeout(finish,0)}})();`;
 
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+        <Script id="theme-init" strategy="beforeInteractive" dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+        <noscript><style>{`html:not([data-theme]) body{visibility:visible!important}`}</style></noscript>
       </head>
       <body>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }} />
