@@ -58,7 +58,7 @@ export function ServicePage({ format }: { format: ProjectFormat }) {
       </section>
       <section className="section page-container service-work-section">
         <div className="section-heading"><p className="eyebrow">Selected work</p><h2>Relevant projects. No digging required.</h2></div>
-        <ProjectGrid projects={projects} />
+        <ProjectGrid projects={projects} showLanguageFilter />
       </section>
       <section className={`cta-section service-cta service-cta-${format} page-container`}><h2>What does your next video need to achieve?</h2><p>Tell me about the channel, audience and result you’re after, and I’ll recommend the right scope.</p><div className="hero-actions"><a className="button button-light" href={site.bookingUrl}>Book a free call <span className="button-endcap"><CalendarIcon /></span></a><Link className="button button-outline-light" href="/request-project">Request a project <span className="button-endcap"><ArrowRightIcon /></span></Link></div></section>
     </main>

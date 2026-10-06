@@ -71,13 +71,13 @@ export function Header() {
           <div className="mobile-panel" onMouseDown={(event) => event.stopPropagation()}>
             <div className="mobile-panel-head"><span>Menu</span><button type="button" onClick={() => setOpen(false)} aria-label="Close menu">×</button></div>
             <nav aria-label="Mobile navigation">
-              <Link href="/" onClick={() => setOpen(false)}>Home <span>↗</span></Link>
-              {nav.map((item) => <Link key={item.href} href={item.href} onClick={() => setOpen(false)}>{item.label}<span>↗</span></Link>)}
+              <Link href="/" onClick={() => setOpen(false)}>Home <span className="mobile-nav-link-icon" aria-hidden="true"><ArrowUpRightIcon /></span></Link>
+              {nav.map((item) => <Link key={item.href} href={item.href} onClick={() => setOpen(false)}>{item.label}<span className="mobile-nav-link-icon" aria-hidden="true"><ArrowUpRightIcon /></span></Link>)}
             </nav>
             <div className="mobile-theme-row"><span>Appearance</span><ThemeToggle /></div>
             <div className="mobile-ctas">
-              <Link className="button button-ghost" href="/request-project" onClick={() => setOpen(false)}>Request a project</Link>
-              <a className="button button-dark" href={site.bookingUrl}>Book a free call <span className="button-endcap"><CalendarIcon /></span></a>
+              <Link className="button nav-request-button mobile-request-button" href="/request-project" onClick={() => setOpen(false)}>Request a project <span className="button-endcap" aria-hidden="true"><ArrowRightIcon /></span></Link>
+              <a className="button button-dark mobile-book-button" href={site.bookingUrl}>Book a free call <span className="button-endcap"><CalendarIcon /></span></a>
             </div>
             <a className="mobile-email" href={`mailto:${site.email}`}>{site.email}</a>
           </div>

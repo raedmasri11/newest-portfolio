@@ -1,5 +1,11 @@
 export type ProjectType = "client" | "concept" | "test";
 export type ProjectFormat = "long-form" | "short-form" | "motion";
+export type ProjectLanguage = "en" | "ar";
+
+export const projectLanguageLabels: Record<ProjectLanguage, string> = {
+  en: "English",
+  ar: "Arabic / Darija",
+};
 
 export type Project = {
   slug: string;
@@ -7,7 +13,7 @@ export type Project = {
   client: string;
   type: ProjectType;
   format: ProjectFormat;
-  language?: "English" | "Arabic / Darija";
+  language: ProjectLanguage;
   year: string;
   description: string;
   role: string[];
@@ -27,7 +33,7 @@ export const projects: Project[] = [
     client: "Midnight Studios",
     type: "client",
     format: "long-form",
-    language: "English",
+    language: "en",
     year: "2026",
     description:
       "A story-driven YouTube project for an independent game studio, combining documentary pacing, custom visual language, motion design and sound-led storytelling.",
@@ -43,7 +49,7 @@ export const projects: Project[] = [
     client: "Concept project",
     type: "concept",
     format: "long-form",
-    language: "English",
+    language: "en",
     year: "2025",
     description:
       "A cinematic company-history opening designed to make a complex AI story feel clear, dramatic and worth watching from the first seconds.",
@@ -59,7 +65,7 @@ export const projects: Project[] = [
     client: "Concept project",
     type: "concept",
     format: "long-form",
-    language: "English",
+    language: "en",
     year: "2025",
     description:
       "A premium brand-history intro built around cinematic pacing, motion graphics and sound-led momentum.",
@@ -75,7 +81,7 @@ export const projects: Project[] = [
     client: "Concept project",
     type: "concept",
     format: "long-form",
-    language: "English",
+    language: "en",
     year: "2025",
     description:
       "A fast, cinematic brand-history opening created to demonstrate documentary pacing and visual storytelling.",
@@ -90,7 +96,7 @@ export const projects: Project[] = [
     client: "Concept project",
     type: "concept",
     format: "long-form",
-    language: "English",
+    language: "en",
     year: "2025",
     description:
       "A tension-led documentary opening using darker pacing, sound design and visual escalation to build curiosity.",
@@ -105,7 +111,7 @@ export const projects: Project[] = [
     client: "Moneyboymaxx",
     type: "test",
     format: "long-form",
-    language: "English",
+    language: "en",
     year: "2026",
     description:
       "A sales-video editing test focused on clean visual communication, retention and business-content pacing.",
@@ -120,7 +126,7 @@ export const projects: Project[] = [
     client: "Covenant Wealth Advisors",
     type: "test",
     format: "long-form",
-    language: "English",
+    language: "en",
     year: "2026",
     description:
       "A finance-focused VSL test using a clean, premium visual system and retention-led pacing.",
@@ -135,7 +141,7 @@ export const projects: Project[] = [
     client: "Jake Trinder",
     type: "test",
     format: "long-form",
-    language: "English",
+    language: "en",
     year: "2026",
     description:
       "A retention-focused VSL editing test with clean pacing, visual storytelling, b-roll and motion graphics.",
@@ -150,7 +156,7 @@ export const projects: Project[] = [
     client: "Dr. Kenza Alami",
     type: "client",
     format: "short-form",
-    language: "Arabic / Darija",
+    language: "ar",
     year: "2026",
     description: "One of four Arabic / Darija medical Reels edited for Dr. Kenza Alami, with clear captions, careful pacing and restrained visual polish.",
     role: ["Editing", "Captions", "B-roll", "Color", "Sound polish"],
@@ -165,7 +171,7 @@ export const projects: Project[] = [
     client: "Dr. Kenza Alami",
     type: "client",
     format: "short-form",
-    language: "Arabic / Darija",
+    language: "ar",
     year: "2026",
     description: "One of four Arabic / Darija medical Reels edited for Dr. Kenza Alami, with clear captions, careful pacing and restrained visual polish.",
     role: ["Editing", "Captions", "B-roll", "Color", "Sound polish"],
@@ -180,7 +186,7 @@ export const projects: Project[] = [
     client: "Dr. Kenza Alami",
     type: "client",
     format: "short-form",
-    language: "Arabic / Darija",
+    language: "ar",
     year: "2026",
     description: "One of four Arabic / Darija medical Reels edited for Dr. Kenza Alami, with clear captions, careful pacing and restrained visual polish.",
     role: ["Editing", "Captions", "B-roll", "Color", "Sound polish"],
@@ -195,7 +201,7 @@ export const projects: Project[] = [
     client: "Dr. Kenza Alami",
     type: "client",
     format: "short-form",
-    language: "Arabic / Darija",
+    language: "ar",
     year: "2026",
     description: "One of four Arabic / Darija medical Reels edited for Dr. Kenza Alami, with clear captions, careful pacing and restrained visual polish.",
     role: ["Editing", "Captions", "B-roll", "Color", "Sound polish"],
@@ -210,7 +216,7 @@ export const projects: Project[] = [
     client: "Scent Council",
     type: "client",
     format: "short-form",
-    language: "English",
+    language: "en",
     year: "2026",
     description: "A short-form brand edit created for Scent Council with polished pacing and a social-first presentation.",
     role: ["Editing", "Pacing", "Visual polish"],
@@ -225,7 +231,7 @@ export const projects: Project[] = [
     client: "Concept project",
     type: "concept",
     format: "short-form",
-    language: "English",
+    language: "en",
     year: "2025",
     description:
       "A founder-style short-form edit designed to keep business content simple, credible and easy to follow.",
@@ -241,7 +247,7 @@ export const projects: Project[] = [
     client: "Concept project",
     type: "concept",
     format: "short-form",
-    language: "English",
+    language: "en",
     year: "2025",
     description:
       "A podcast clip rebuilt for short-form with visual hooks, engaging captions, dynamic cuts and supporting visuals.",
@@ -256,7 +262,7 @@ export const projects: Project[] = [
     client: "Concept project",
     type: "concept",
     format: "short-form",
-    language: "English",
+    language: "en",
     year: "2025",
     description:
       "An educational Reel using clean typography, Apple-inspired motion and dynamic transitions to clarify a sales concept.",
@@ -271,7 +277,7 @@ export const projects: Project[] = [
     client: "Concept project",
     type: "concept",
     format: "short-form",
-    language: "English",
+    language: "en",
     year: "2025",
     description:
       "A talking-head educational Reel with readable captions, quick cuts and clean pacing.",
@@ -286,7 +292,7 @@ export const projects: Project[] = [
     client: "Concept project",
     type: "concept",
     format: "short-form",
-    language: "English",
+    language: "en",
     year: "2026",
     description:
       "A short-form editing study focused on hook clarity, pacing, captions and visual momentum for personal-brand content.",
@@ -301,7 +307,7 @@ export const projects: Project[] = [
     client: "Concept project",
     type: "concept",
     format: "short-form",
-    language: "English",
+    language: "en",
     year: "2026",
     description:
       "A high-energy personal-brand short using typography, punch-ins and clean visual hierarchy to keep the message moving.",
@@ -316,7 +322,7 @@ export const projects: Project[] = [
     client: "Motion study",
     type: "concept",
     format: "motion",
-    language: "English",
+    language: "en",
     year: "2026",
     description:
       "A motion-graphics study focused on typography, timing and visual hierarchy.",
@@ -332,7 +338,7 @@ export const projects: Project[] = [
     client: "Motion study",
     type: "concept",
     format: "motion",
-    language: "English",
+    language: "en",
     year: "2026",
     description:
       "A focused motion-design experiment showing animation timing and compositional movement.",
@@ -347,7 +353,7 @@ export const projects: Project[] = [
     client: "Motion study",
     type: "concept",
     format: "motion",
-    language: "English",
+    language: "en",
     year: "2026",
     description:
       "A personal motion showcase created to demonstrate editing rhythm, movement and graphic polish.",

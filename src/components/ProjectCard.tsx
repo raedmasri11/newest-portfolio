@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "motion/react";
-import type { Project } from "@/data/projects";
+import { projectLanguageLabels, type Project } from "@/data/projects";
 
 const typeLabel = {
   client: "Client work",
@@ -70,7 +70,7 @@ export function ProjectCard({
             </div>
             <div className="project-meta">
               <span>{project.aspect}</span>
-              {project.language && <span>{project.language}</span>}
+              <span>{projectLanguageLabels[project.language]}</span>
             </div>
           </div>
           <Link className="project-detail-link" href={`/work/${project.slug}`}>Project details →</Link>

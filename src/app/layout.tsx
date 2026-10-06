@@ -4,18 +4,37 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { site } from "@/data/site";
 
+const socialTitle = "Raed Masri — Video Editor & Motion Designer";
+const socialDescription = "YouTube, documentary and short-form edits built around story, clarity and retention.";
+const socialImagePath = "/og-preview.png";
+const socialImageUrl = new URL(socialImagePath, site.url).toString();
+
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
-  title: { default: "Raed Masri — Video Editor & Motion Designer", template: "%s | Raed Masri" },
-  description: "Story-driven YouTube, documentary and short-form video editing for creators, personal brands and businesses. Motion graphics, sound design and retention-focused pacing.",
+  title: { default: socialTitle, template: "%s | Raed Masri" },
+  description: socialDescription,
+  alternates: { canonical: site.url },
   openGraph: {
     type: "website",
     url: site.url,
     siteName: "Raed Masri",
-    title: "Raed Masri — Video Editor & Motion Designer",
-    description: "YouTube, documentary and short-form edits built around story, clarity and retention.",
+    title: socialTitle,
+    description: socialDescription,
+    images: [
+      {
+        url: socialImageUrl,
+        width: 1200,
+        height: 630,
+        alt: socialTitle,
+      },
+    ],
   },
-  twitter: { card: "summary_large_image", title: "Raed Masri — Video Editor & Motion Designer", description: "YouTube, documentary and short-form edits built around story, clarity and retention." },
+  twitter: {
+    card: "summary_large_image",
+    title: socialTitle,
+    description: socialDescription,
+    images: [socialImageUrl],
+  },
   icons: {
     icon: [
       { url: "/favicon.svg?v=2", type: "image/svg+xml" },
@@ -27,10 +46,14 @@ export const metadata: Metadata = {
   },
 };
 
-export const viewport: Viewport = { width: "device-width", initialScale: 1, themeColor: [
-  { media: "(prefers-color-scheme: light)", color: "#f3eee8" },
-  { media: "(prefers-color-scheme: dark)", color: "#060403" },
-] };
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#f3eee8" },
+    { media: "(prefers-color-scheme: dark)", color: "#060403" },
+  ],
+};
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   const personJsonLd = {
@@ -44,7 +67,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     knowsLanguage: ["Arabic", "English", "French"],
   };
 
-  const themeInitScript = `try{var r=document.documentElement;var t=localStorage.getItem('theme')||'auto';var d=t==='dark'||(t==='auto'&&window.matchMedia('(prefers-color-scheme: dark)').matches);r.dataset.theme=t;r.classList.toggle('dark',d);r.style.colorScheme=d?'dark':'light'}catch(e){}`;
+  const themeInitScript = `(function(){var r=document.documentElement;var saved=null;try{var value=localStorage.getItem('theme');if(value==='light'||value==='dark'){saved=value}else if(value!==null){localStorage.removeItem('theme')}}catch(e){}var systemDark=!!(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches);var resolved=saved||(systemDark?'dark':'light');r.dataset.theme=resolved;r.dataset.themeSource=saved?'manual':'system';r.classList.toggle('dark',resolved==='dark');r.style.colorScheme=resolved})();`;
 
   return (
     <html lang="en" suppressHydrationWarning>

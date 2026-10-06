@@ -4,37 +4,88 @@ import { useEffect, useState } from "react";
 
 type Theme = "light" | "dark";
 
-function applyTheme(theme: Theme) {
+const STORAGE_KEY = "theme";
+const SYSTEM_QUERY = "(prefers-color-scheme: dark)";
+
+function getStoredTheme(): Theme | null {
+  try {
+    const stored = window.localStorage.getItem(STORAGE_KEY);
+    return stored === "light" || stored === "dark" ? stored : null;
+  } catch {
+    return null;
+  }
+}
+
+
+function applyTheme(theme: Theme, source: "manual" | "system") {
   const root = document.documentElement;
   root.dataset.theme = theme;
+  root.dataset.themeSource = source;
   root.classList.toggle("dark", theme === "dark");
+  root.style.colorScheme = theme;
 }
 
 export function ThemeToggle() {
-  const [theme, setTheme] = useState<Theme>("dark");
+  const [theme, setTheme] = useState<Theme | null>(null);
 
   useEffect(() => {
-    // Respect the theme already applied by the pre-hydration script so the
-    // control never flashes the wrong icon on first paint.
-    setTheme(document.documentElement.classList.contains("dark") ? "dark" : "light");
+    const media = window.matchMedia(SYSTEM_QUERY);
+
+    const syncFromPreference = () => {
+      const stored = getStoredTheme();
+      const next = stored ?? (media.matches ? "dark" : "light");
+      applyTheme(next, stored ? "manual" : "system");
+      setTheme(next);
+    };
+
+    const onSystemChange = (event: MediaQueryListEvent) => {
+      if (getStoredTheme()) return;
+      const next: Theme = event.matches ? "dark" : "light";
+      applyTheme(next, "system");
+      setTheme(next);
+    };
+
+    const onThemeChange = (event: Event) => {
+      const next = (event as CustomEvent<Theme>).detail;
+      if (next === "light" || next === "dark") setTheme(next);
+    };
+
+    const onStorage = (event: StorageEvent) => {
+      if (event.key === STORAGE_KEY) syncFromPreference();
+    };
+
+    syncFromPreference();
+    media.addEventListener("change", onSystemChange);
+    window.addEventListener("raed-theme-change", onThemeChange as EventListener);
+    window.addEventListener("storage", onStorage);
+
+    return () => {
+      media.removeEventListener("change", onSystemChange);
+      window.removeEventListener("raed-theme-change", onThemeChange as EventListener);
+      window.removeEventListener("storage", onStorage);
+    };
   }, []);
 
   const toggleTheme = () => {
-    const next: Theme = theme === "dark" ? "light" : "dark";
+    const current: Theme = document.documentElement.classList.contains("dark") ? "dark" : "light";
+    const next: Theme = current === "dark" ? "light" : "dark";
+    try { window.localStorage.setItem(STORAGE_KEY, next); } catch { /* storage can be unavailable */ }
+    applyTheme(next, "manual");
     setTheme(next);
-    localStorage.setItem("theme", next);
-    applyTheme(next);
+    window.dispatchEvent(new CustomEvent<Theme>("raed-theme-change", { detail: next }));
   };
 
   const isDark = theme === "dark";
+  const stateClass = theme ? (isDark ? "is-dark" : "is-light") : "";
+  const toggleLabel = theme ? `Switch to ${isDark ? "light" : "dark"} mode` : "Toggle appearance";
 
   return (
     <button
       type="button"
-      className={`theme-toggle-circle ${isDark ? "is-dark" : "is-light"}`}
+      className={`theme-toggle-circle ${stateClass}`}
       onClick={toggleTheme}
-      aria-label={`Switch to ${isDark ? "light" : "dark"} mode`}
-      title={`Switch to ${isDark ? "light" : "dark"} mode`}
+      aria-label={toggleLabel}
+      title={toggleLabel}
     >
       <span className="theme-icon theme-icon-moon" aria-hidden="true">
         <svg viewBox="0 0 24 24" focusable="false">

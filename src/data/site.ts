@@ -1,7 +1,7 @@
 export const site = {
   name: "Raed Masri",
   role: "Video editor & motion designer",
-  url: "https://raedmasri.me",
+  url: "https://raednewportfolio.netlify.app",
   email: "raed.bus.raed@gmail.com",
   instagram: "https://www.instagram.com/masrieditmaster/",
   xUrl: "https://x.com/masrieditmaster",

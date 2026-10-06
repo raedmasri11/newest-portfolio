@@ -156,7 +156,7 @@ export default function Home() {
 
       <section className="section work-section page-container" id="work">
         <SectionHeading eyebrow="Selected work" title="Press play. The work should do the convincing." copy="Client projects, concept pieces and editing tests are labeled clearly so you always know what you’re watching." />
-        <ProjectGrid projects={portfolioProjects} variant="carousel" />
+        <ProjectGrid projects={portfolioProjects} variant="carousel" showLanguageFilter />
       </section>
 
       <ProcessSection

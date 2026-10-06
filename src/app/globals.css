@@ -110,7 +110,7 @@ img, video { display: block; max-width: 100%; }
 }
 
 @media (max-width: 680px) {
-  .page-container{width:min(100% - 24px,var(--container))}.section{padding:82px 0}.site-header-wrap{top:8px;margin-top:8px}.site-header{min-height:58px}.brand-mark{width:34px;height:34px}.hero{min-height:auto;padding:62px 0 58px;gap:40px}.hero-copy h1,.service-hero h1,.page-hero h1,.project-page h1,.request-intro h1{font-size:clamp(45px,14vw,68px)}.hero-lead,.service-lead{font-size:17px}.hero-actions{display:grid;grid-template-columns:1fr}.button{width:100%}.chip-one{left:5px;top:-15px}.chip-two{right:5px;top:38%}.chip-three{right:10%;bottom:-15px}.editor-shell{border-radius:22px}.monitor-overlay{left:16px;bottom:14px}.section-heading{grid-template-columns:1fr;gap:0}.section-heading .eyebrow{margin-top:0}.section-copy{grid-column:auto}.section-heading h2,.performance-head h2,.faq-intro h2,.service-split h2,.case-study h2{font-size:clamp(38px,12vw,58px)}.projects-grid{grid-template-columns:1fr;gap:30px}.project-card.aspect-9x16 .project-media{aspect-ratio:9/13}.process-grid{grid-template-columns:1fr}.process-grid article{min-height:230px;border-right:0}.process-grid h3{margin-top:70px}.testimonial-grid blockquote{font-size:23px}.cta-section{width:calc(100% - 24px);padding:45px 24px}.cta-section h2{font-size:46px}.footer-columns{grid-template-columns:1fr 1fr}.footer-bottom{flex-direction:column}.project-facts{grid-template-columns:1fr}.project-page-visual{min-height:320px}.choice-grid{grid-template-columns:1fr}.project-form{padding:22px}.mobile-ctas{grid-template-columns:1fr}.trust-strip div{gap:12px 18px}
+  .page-container{width:min(100% - 24px,var(--container))}.section{padding:82px 0}.site-header-wrap{top:8px;margin-top:8px}.site-header{min-height:58px}.brand-mark{width:34px;height:34px}.hero{min-height:auto;padding:62px 0 58px;gap:40px}.hero-copy h1,.service-hero h1,.page-hero h1,.project-page h1,.request-intro h1{font-size:clamp(45px,14vw,68px)}.hero-lead,.service-lead{font-size:17px}.hero-actions{display:grid;grid-template-columns:1fr}.button{max-width:100%}.chip-one{left:5px;top:-15px}.chip-two{right:5px;top:38%}.chip-three{right:10%;bottom:-15px}.editor-shell{border-radius:22px}.monitor-overlay{left:16px;bottom:14px}.section-heading{grid-template-columns:1fr;gap:0}.section-heading .eyebrow{margin-top:0}.section-copy{grid-column:auto}.section-heading h2,.performance-head h2,.faq-intro h2,.service-split h2,.case-study h2{font-size:clamp(38px,12vw,58px)}.projects-grid{grid-template-columns:1fr;gap:30px}.project-card.aspect-9x16 .project-media{aspect-ratio:9/13}.process-grid{grid-template-columns:1fr}.process-grid article{min-height:230px;border-right:0}.process-grid h3{margin-top:70px}.testimonial-grid blockquote{font-size:23px}.cta-section{width:calc(100% - 24px);padding:45px 24px}.cta-section h2{font-size:46px}.footer-columns{grid-template-columns:1fr 1fr}.footer-bottom{flex-direction:column}.project-facts{grid-template-columns:1fr}.project-page-visual{min-height:320px}.choice-grid{grid-template-columns:1fr}.project-form{padding:22px}.mobile-ctas{grid-template-columns:1fr}.trust-strip div{gap:12px 18px}
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -2944,7 +2944,7 @@ html:not(.dark) .footer-ambient-wordmark { color:rgba(45,24,13,.065); }
   margin-left: 3px;
 }
 @media (max-width: 700px) {
-  .hero-copy > div .hero-actions .button { width: 100%; }
+  .hero-copy > div .hero-actions .button { width: fit-content; max-width: 100%; }
 }
 
 /* v2.4.3 — targeted five-step project form validation and interaction polish */
@@ -4793,3 +4793,329 @@ html:not(.dark) .editor-monitor .monitor-overlay span {
   height:18px;
 }
 
+
+/* === v2.4.19 mobile theme + CTA architecture correction ===================
+   Mobile-only layout refinements plus system-theme fallback. No desktop
+   layout changes and no timeline/content changes.
+   ========================================================================== */
+
+/* Before the synchronous head script resolves a theme, let CSS itself follow
+   the OS. This removes the light default as a first-paint fallback on dark
+   devices even when JavaScript/storage is momentarily unavailable. */
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme]) {
+    --bg:#0c0d0e;
+    --canvas-soft:#111214;
+    --surface:#17181a;
+    --surface-2:#1e2023;
+    --surface-3:#24262a;
+    --ink:#f6f3ed;
+    --muted:#a7a39b;
+    --muted-2:#77746e;
+    --line:rgba(255,255,255,.085);
+    --line-strong:rgba(255,255,255,.17);
+    --accent:#db8a45;
+    --accent-strong:#ee9d54;
+    --coral:#ea6b57;
+    --violet:#8e70ff;
+    --cyan:#4ca7d8;
+    --emerald:#58b08a;
+    --success:#58b08a;
+    --shadow:0 26px 78px rgba(0,0,0,.28);
+    --shadow-raised:0 34px 100px rgba(0,0,0,.38);
+    color-scheme:dark;
+  }
+}
+
+/* The root theme class is authoritative from first paint. This keeps the
+   toggle icon visually correct before React has hydrated its local state. */
+html.dark .theme-toggle-circle {
+  border-color:#f26522;
+  background:#060403;
+}
+html.dark .theme-toggle-circle .theme-icon-moon {
+  color:#f7f1ec;
+  opacity:1;
+  transform:rotate(0deg) scale(1);
+}
+html.dark .theme-toggle-circle .theme-icon-sun {
+  color:#17110e;
+  opacity:0;
+  transform:rotate(-75deg) scale(.55);
+}
+html:not(.dark) .theme-toggle-circle {
+  border-color:#f26522;
+  background:#fbf7f2;
+}
+html:not(.dark) .theme-toggle-circle .theme-icon-moon {
+  color:#f7f1ec;
+  opacity:0;
+  transform:rotate(75deg) scale(.55);
+}
+html:not(.dark) .theme-toggle-circle .theme-icon-sun {
+  color:#17110e;
+  opacity:1;
+  transform:rotate(0deg) scale(1);
+}
+
+@media (max-width:700px) {
+  /* Homepage hero CTAs are compact, centered pills rather than stretched grid
+     items. Touch height, end-caps, borders and glows stay unchanged. */
+  .hero-copy .hero-actions {
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    width:100%;
+    gap:10px;
+  }
+  .hero-copy > div .hero-actions .button,
+  .hero-copy .hero-actions .button {
+    width:fit-content;
+    max-width:100%;
+    min-height:52px;
+    margin-inline:auto;
+    align-self:center;
+    padding-left:20px;
+    font-size:clamp(15.5px,4.1vw,16.5px);
+    font-weight:790;
+    line-height:1;
+    justify-content:space-between;
+    gap:14px;
+  }
+  .hero-copy .hero-actions .button > span:last-child {
+    flex:0 0 40px;
+  }
+
+  /* Service-page hero CTAs are the same content-width mobile treatment. The
+     lower service CTA and form/footer controls keep their existing intent. */
+  .service-hero .hero-actions {
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    width:100%;
+    gap:10px;
+  }
+  .service-hero .hero-actions .button {
+    width:fit-content;
+    max-width:100%;
+    min-height:52px;
+    font-size:15px;
+    font-weight:780;
+  }
+
+  /* Mobile drawer actions are intentionally full-width. Their internal
+     alignment follows text-left / icon-right instead of centering both. */
+  .mobile-ctas {
+    width:100%;
+    display:grid;
+    grid-template-columns:1fr;
+    gap:10px;
+    margin-top:18px;
+  }
+  .mobile-ctas .button {
+    width:100%;
+    min-height:58px;
+    padding:5px 6px 5px 20px;
+    justify-content:space-between;
+    gap:16px;
+    border-radius:999px;
+    font-size:clamp(16px,4.2vw,17px);
+    font-weight:800;
+    line-height:1;
+    text-align:left;
+  }
+  .mobile-ctas .button-endcap {
+    width:44px;
+    height:44px;
+    flex:0 0 44px;
+    display:grid !important;
+    place-items:center;
+    margin-left:auto;
+    border-radius:50%;
+    transform:none;
+  }
+  .mobile-ctas .mobile-request-button {
+    border-color:color-mix(in srgb,var(--accent) 36%,var(--line));
+  }
+  .mobile-ctas .mobile-request-button .nav-arrow-icon {
+    width:18px;
+    height:18px;
+    stroke-width:2.05;
+  }
+  .mobile-ctas .mobile-book-button .calendar-icon {
+    width:19px;
+    height:19px;
+  }
+
+  /* Standardize the small outbound arrows in the mobile navigation without
+     changing the menu's structure, spacing or link destinations. */
+  .mobile-panel nav a .mobile-nav-link-icon {
+    width:28px;
+    height:28px;
+    flex:0 0 28px;
+    display:grid;
+    place-items:center;
+    color:var(--muted);
+  }
+  .mobile-panel nav a .mobile-nav-link-icon .nav-arrow-icon {
+    width:15px;
+    height:15px;
+    stroke-width:1.9;
+  }
+
+  /* These controls are intentionally full-width by design. Keep the content
+     layout purposeful rather than inheriting a blanket button rule. */
+  .faq-contact-upgraded .faq-whatsapp-button,
+  .footer-precta .button,
+  .form-success-actions .button {
+    width:100%;
+  }
+}
+
+/* === v2.4.22 portfolio project language filter ============================
+   EN/AR filters project/video content only. Shared by the homepage carousel
+   and the Long-form / Short-form / Motion project grids.                   */
+.project-language-filter {
+  display:inline-grid;
+  grid-template-columns:repeat(2, minmax(0,1fr));
+  align-items:center;
+  gap:2px;
+  width:max-content;
+  padding:3px;
+  border:1px solid color-mix(in srgb,var(--line) 78%,rgba(230,126,55,.24));
+  border-radius:999px;
+  background:color-mix(in srgb,var(--surface) 92%,transparent);
+  box-shadow:inset 0 1px 0 color-mix(in srgb,var(--ink) 7%,transparent),0 8px 24px rgba(0,0,0,.06);
+}
+.project-language-filter button {
+  min-width:44px;
+  height:32px;
+  display:grid;
+  place-items:center;
+  padding:0 11px;
+  border:0;
+  border-radius:999px;
+  background:transparent;
+  color:var(--muted);
+  font-size:11px;
+  font-weight:820;
+  letter-spacing:.08em;
+  line-height:1;
+  cursor:pointer;
+  transition:background .22s var(--ease-premium),color .22s ease,box-shadow .22s ease,transform .22s var(--ease-premium);
+}
+.project-language-filter button:hover:not(.is-active) {
+  color:var(--ink);
+  background:color-mix(in srgb,var(--surface-2) 72%,transparent);
+}
+.project-language-filter button.is-active {
+  background:linear-gradient(112deg,#f57429 0%,#ffad55 100%);
+  color:#160b05;
+  box-shadow:0 6px 18px rgba(245,116,41,.18),inset 0 1px 0 rgba(255,255,255,.42);
+}
+.project-language-filter button:focus-visible {
+  outline:2px solid #f78b34;
+  outline-offset:3px;
+}
+.project-grid-language-toolbar {
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  margin:-30px 0 30px;
+}
+.project-language-empty {
+  width:100%;
+  min-height:190px;
+  display:grid;
+  place-items:center;
+  padding:30px;
+  border:1px solid var(--line);
+  border-radius:22px;
+  background:color-mix(in srgb,var(--surface) 78%,transparent);
+  color:var(--muted);
+  font-size:14px;
+  font-weight:650;
+  text-align:center;
+}
+.project-language-empty-grid { min-height:230px; }
+.work-section .project-carousel-toolbar {
+  align-items:center;
+  gap:12px;
+}
+.work-section .project-carousel-toolbar .project-language-filter {
+  pointer-events:auto;
+}
+
+@media (max-width:980px) {
+  .project-grid-language-toolbar { margin:-24px 0 28px; }
+}
+
+@media (max-width:680px) {
+  .project-grid-language-toolbar {
+    justify-content:flex-start;
+    margin:-14px 0 24px;
+  }
+  .work-section .project-carousel-toolbar {
+    width:100%;
+    justify-content:space-between;
+    gap:16px;
+  }
+  .project-language-filter { flex:0 0 auto; }
+  .project-language-filter button {
+    min-width:42px;
+    height:32px;
+    padding-inline:10px;
+  }
+  .project-language-empty {
+    min-height:160px;
+    padding:24px 18px;
+    border-radius:18px;
+  }
+  .project-language-empty-grid { min-height:190px; }
+}
+
+@media (prefers-reduced-motion:reduce) {
+  .project-language-filter button { transition:none; }
+}
+
+/* === v2.4.23 targeted mobile CTA alignment ================================
+   Mobile only: keep homepage hero and footer pre-CTA buttons compact and
+   aligned to the same left content axis. No desktop/global button changes. */
+@media (max-width:700px) {
+  /* Homepage hero: undo the late centering override without changing the
+     existing pill sizing, glow, typography or icon treatment. */
+  .hero-copy .hero-actions {
+    align-items:flex-start;
+    justify-content:flex-start;
+  }
+  .hero-copy > div .hero-actions .button,
+  .hero-copy .hero-actions .button {
+    width:fit-content;
+    max-width:100%;
+    margin-inline:0;
+    align-self:flex-start;
+    flex:0 0 auto;
+  }
+  .hero-copy .hero-actions .button > span:last-child {
+    flex-shrink:0;
+  }
+
+  /* Orange pre-footer CTA: an older mobile rule grouped this booking button
+     with intentionally full-width controls. Restore intrinsic sizing only for
+     this one CTA and anchor it to the card's left content edge. */
+  .footer-precta {
+    justify-items:start;
+  }
+  .footer-precta .button-footer-dark {
+    width:fit-content;
+    max-width:100%;
+    justify-self:start;
+    align-self:start;
+    flex:0 0 auto;
+  }
+  .footer-precta .button-footer-dark .button-endcap {
+    flex-shrink:0;
+    aspect-ratio:1;
+  }
+}
