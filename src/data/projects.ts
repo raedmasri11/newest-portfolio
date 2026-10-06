@@ -1,0 +1,370 @@
+export type ProjectType = "client" | "concept" | "test";
+export type ProjectFormat = "long-form" | "short-form" | "motion";
+
+export type Project = {
+  slug: string;
+  title: string;
+  client: string;
+  type: ProjectType;
+  format: ProjectFormat;
+  language?: "English" | "Arabic / Darija";
+  year: string;
+  description: string;
+  role: string[];
+  thumbnail?: string;
+  videoUrl?: string;
+  externalUrl?: string;
+  aspect: "16:9" | "9:16";
+  duration?: string;
+  featured?: boolean;
+  comingSoon?: boolean;
+};
+
+export const projects: Project[] = [
+  {
+    slug: "midnight-studios-youtube",
+    title: "Studio Launch Story",
+    client: "Midnight Studios",
+    type: "client",
+    format: "long-form",
+    language: "English",
+    year: "2026",
+    description:
+      "A story-driven YouTube project for an independent game studio, combining documentary pacing, custom visual language, motion design and sound-led storytelling.",
+    role: ["Editing", "Story pacing", "Motion graphics", "Sound design"],
+    externalUrl: "https://www.midnightstudios.app/",
+    aspect: "16:9",
+    featured: true,
+    comingSoon: true,
+  },
+  {
+    slug: "chatgpt-documentary-intro",
+    title: "ChatGPT Documentary Intro",
+    client: "Concept project",
+    type: "concept",
+    format: "long-form",
+    language: "English",
+    year: "2025",
+    description:
+      "A cinematic company-history opening designed to make a complex AI story feel clear, dramatic and worth watching from the first seconds.",
+    role: ["Editing", "Motion graphics", "Sound design", "Pacing"],
+    thumbnail: "/thumbs/chatgpt.webp",
+    videoUrl: "https://youtu.be/WjGbXnCPxpk",
+    aspect: "16:9",
+    featured: true,
+  },
+  {
+    slug: "sony-documentary-intro",
+    title: "Sony Company Documentary Intro",
+    client: "Concept project",
+    type: "concept",
+    format: "long-form",
+    language: "English",
+    year: "2025",
+    description:
+      "A premium brand-history intro built around cinematic pacing, motion graphics and sound-led momentum.",
+    role: ["Editing", "Motion graphics", "Sound design", "Storytelling"],
+    thumbnail: "/thumbs/sony.webp",
+    videoUrl: "https://youtu.be/yqdNfS-IyPE",
+    aspect: "16:9",
+    featured: true,
+  },
+  {
+    slug: "coca-cola-documentary-intro",
+    title: "Coca-Cola Documentary Intro",
+    client: "Concept project",
+    type: "concept",
+    format: "long-form",
+    language: "English",
+    year: "2025",
+    description:
+      "A fast, cinematic brand-history opening created to demonstrate documentary pacing and visual storytelling.",
+    role: ["Editing", "Transitions", "Pacing", "Sound design"],
+    thumbnail: "/thumbs/magnatesmedia.webp",
+    videoUrl: "https://youtu.be/HoCuOTET3kE",
+    aspect: "16:9",
+  },
+  {
+    slug: "geopolitical-documentary-intro",
+    title: "Geopolitical Documentary Intro",
+    client: "Concept project",
+    type: "concept",
+    format: "long-form",
+    language: "English",
+    year: "2025",
+    description:
+      "A tension-led documentary opening using darker pacing, sound design and visual escalation to build curiosity.",
+    role: ["Editing", "Pacing", "Sound design"],
+    thumbnail: "/thumbs/ali.webp",
+    videoUrl: "https://youtu.be/yzAc5S0jFM0",
+    aspect: "16:9",
+  },
+  {
+    slug: "moneyboymaxx-vsl-test",
+    title: "VSL Editing Test",
+    client: "Moneyboymaxx",
+    type: "test",
+    format: "long-form",
+    language: "English",
+    year: "2026",
+    description:
+      "A sales-video editing test focused on clean visual communication, retention and business-content pacing.",
+    role: ["Editing", "B-roll", "Motion graphics", "Pacing"],
+    thumbnail: "/thumbs/vsl-editing-test.webp",
+    videoUrl: "https://youtu.be/HTDNlHUBPUs",
+    aspect: "16:9",
+  },
+  {
+    slug: "covenant-wealth-vsl-test",
+    title: "Finance VSL Editing Test",
+    client: "Covenant Wealth Advisors",
+    type: "test",
+    format: "long-form",
+    language: "English",
+    year: "2026",
+    description:
+      "A finance-focused VSL test using a clean, premium visual system and retention-led pacing.",
+    role: ["Editing", "Motion graphics", "B-roll", "Sound design"],
+    thumbnail: "/thumbs/finance-vsl-editing-test.webp",
+    videoUrl: "https://youtu.be/Y-dewZCD0IA",
+    aspect: "16:9",
+  },
+  {
+    slug: "jake-trinder-vsl-test",
+    title: "Business VSL Editing Test",
+    client: "Jake Trinder",
+    type: "test",
+    format: "long-form",
+    language: "English",
+    year: "2026",
+    description:
+      "A retention-focused VSL editing test with clean pacing, visual storytelling, b-roll and motion graphics.",
+    role: ["Editing", "Pacing", "Motion graphics", "B-roll", "Sound design"],
+    thumbnail: "/thumbs/jake-trinder-vsl.webp",
+    videoUrl: "https://youtu.be/DBBstNLWZSo",
+    aspect: "16:9",
+  },
+  {
+    slug: "dr-kenza-medical-reels",
+    title: "Medical Reel 01",
+    client: "Dr. Kenza Alami",
+    type: "client",
+    format: "short-form",
+    language: "Arabic / Darija",
+    year: "2026",
+    description: "One of four Arabic / Darija medical Reels edited for Dr. Kenza Alami, with clear captions, careful pacing and restrained visual polish.",
+    role: ["Editing", "Captions", "B-roll", "Color", "Sound polish"],
+    thumbnail: "/thumbs/dr-kenza-reel-01.webp",
+    externalUrl: "https://www.instagram.com/p/DbYprW4x2Ox/",
+    aspect: "9:16",
+    featured: true,
+  },
+  {
+    slug: "dr-kenza-medical-reel-02",
+    title: "Medical Reel 02",
+    client: "Dr. Kenza Alami",
+    type: "client",
+    format: "short-form",
+    language: "Arabic / Darija",
+    year: "2026",
+    description: "One of four Arabic / Darija medical Reels edited for Dr. Kenza Alami, with clear captions, careful pacing and restrained visual polish.",
+    role: ["Editing", "Captions", "B-roll", "Color", "Sound polish"],
+    thumbnail: "/thumbs/dr-kenza-reel-02.webp",
+    externalUrl: "https://www.instagram.com/p/DbGn8u2s0yI/",
+    aspect: "9:16",
+    featured: true,
+  },
+  {
+    slug: "dr-kenza-medical-reel-03",
+    title: "Medical Reel 03",
+    client: "Dr. Kenza Alami",
+    type: "client",
+    format: "short-form",
+    language: "Arabic / Darija",
+    year: "2026",
+    description: "One of four Arabic / Darija medical Reels edited for Dr. Kenza Alami, with clear captions, careful pacing and restrained visual polish.",
+    role: ["Editing", "Captions", "B-roll", "Color", "Sound polish"],
+    thumbnail: "/thumbs/dr-kenza-reel-03.webp",
+    externalUrl: "https://www.instagram.com/p/Da0jRi1sqfI/",
+    aspect: "9:16",
+    featured: true,
+  },
+  {
+    slug: "dr-kenza-medical-reel-04",
+    title: "Medical Reel 04",
+    client: "Dr. Kenza Alami",
+    type: "client",
+    format: "short-form",
+    language: "Arabic / Darija",
+    year: "2026",
+    description: "One of four Arabic / Darija medical Reels edited for Dr. Kenza Alami, with clear captions, careful pacing and restrained visual polish.",
+    role: ["Editing", "Captions", "B-roll", "Color", "Sound polish"],
+    thumbnail: "/thumbs/dr-kenza-reel-04.webp",
+    externalUrl: "https://www.instagram.com/p/DZsgZ2HsVT-/",
+    aspect: "9:16",
+    featured: true,
+  },
+  {
+    slug: "scent-council-reel",
+    title: "Fragrance Brand Reel",
+    client: "Scent Council",
+    type: "client",
+    format: "short-form",
+    language: "English",
+    year: "2026",
+    description: "A short-form brand edit created for Scent Council with polished pacing and a social-first presentation.",
+    role: ["Editing", "Pacing", "Visual polish"],
+    thumbnail: "/thumbs/scent-council-reel.webp",
+    externalUrl: "https://www.instagram.com/p/Dc3Uo0aueUo/",
+    aspect: "9:16",
+    featured: true,
+  },
+  {
+    slug: "nexus-founder-reel",
+    title: "Nexus Founder-Style Reel",
+    client: "Concept project",
+    type: "concept",
+    format: "short-form",
+    language: "English",
+    year: "2025",
+    description:
+      "A founder-style short-form edit designed to keep business content simple, credible and easy to follow.",
+    role: ["Editing", "Captions", "B-roll", "Pacing"],
+    thumbnail: "/thumbs/nexus.webp",
+    videoUrl: "https://youtube.com/shorts/Ly205gQryd8",
+    aspect: "9:16",
+    featured: true,
+  },
+  {
+    slug: "podcast-short-form",
+    title: "Podcast Short-Form Edit",
+    client: "Concept project",
+    type: "concept",
+    format: "short-form",
+    language: "English",
+    year: "2025",
+    description:
+      "A podcast clip rebuilt for short-form with visual hooks, engaging captions, dynamic cuts and supporting visuals.",
+    role: ["Editing", "Captions", "Visual hooks", "Sound design"],
+    thumbnail: "/thumbs/paul.webp",
+    videoUrl: "https://youtube.com/shorts/ToH13u74m5c",
+    aspect: "9:16",
+  },
+  {
+    slug: "hormozi-sales-reel",
+    title: "Sales Technique Reel",
+    client: "Concept project",
+    type: "concept",
+    format: "short-form",
+    language: "English",
+    year: "2025",
+    description:
+      "An educational Reel using clean typography, Apple-inspired motion and dynamic transitions to clarify a sales concept.",
+    role: ["Editing", "Motion graphics", "Pacing", "Sound design"],
+    thumbnail: "/thumbs/hormozi.webp",
+    videoUrl: "https://youtube.com/shorts/8mq9RNZU5tw",
+    aspect: "9:16",
+  },
+  {
+    slug: "chatgpt-content-reel",
+    title: "ChatGPT Content Ideas Reel",
+    client: "Concept project",
+    type: "concept",
+    format: "short-form",
+    language: "English",
+    year: "2025",
+    description:
+      "A talking-head educational Reel with readable captions, quick cuts and clean pacing.",
+    role: ["Editing", "Captions", "Pacing"],
+    thumbnail: "/thumbs/joseph.webp",
+    videoUrl: "https://youtube.com/shorts/gV1Olh0LW4k",
+    aspect: "9:16",
+  },
+  {
+    slug: "short-form-retention-study",
+    title: "Joseph — High-Retention Short-Form",
+    client: "Concept project",
+    type: "concept",
+    format: "short-form",
+    language: "English",
+    year: "2026",
+    description:
+      "A short-form editing study focused on hook clarity, pacing, captions and visual momentum for personal-brand content.",
+    role: ["Editing", "Captions", "Pacing", "Visual hooks"],
+    thumbnail: "/thumbs/joseph-high-retention.png",
+    videoUrl: "https://youtube.com/shorts/6A_yA-L0hLk?feature=share",
+    aspect: "9:16",
+  },
+  {
+    slug: "joseph-personal-brand-reel",
+    title: "Joseph Personal-Brand Reel",
+    client: "Concept project",
+    type: "concept",
+    format: "short-form",
+    language: "English",
+    year: "2026",
+    description:
+      "A high-energy personal-brand short using typography, punch-ins and clean visual hierarchy to keep the message moving.",
+    role: ["Editing", "Captions", "Motion graphics", "Pacing"],
+    thumbnail: "/thumbs/joseph-editing.webp",
+    videoUrl: "https://youtube.com/shorts/mymPKQ-3WNY?feature=share",
+    aspect: "9:16",
+  },
+  {
+    slug: "motion-hire-me",
+    title: "Steps to Hire Me",
+    client: "Motion study",
+    type: "concept",
+    format: "motion",
+    language: "English",
+    year: "2026",
+    description:
+      "A motion-graphics study focused on typography, timing and visual hierarchy.",
+    role: ["Motion design", "Typography", "Animation"],
+    thumbnail: "/thumbs/steps-to-hire-me.webp",
+    videoUrl: "https://youtu.be/Hyxb-ErHry8",
+    aspect: "16:9",
+    featured: true,
+  },
+  {
+    slug: "motion-playing-with-motions",
+    title: "Playing With Motion",
+    client: "Motion study",
+    type: "concept",
+    format: "motion",
+    language: "English",
+    year: "2026",
+    description:
+      "A focused motion-design experiment showing animation timing and compositional movement.",
+    role: ["Motion design", "Animation", "Timing"],
+    thumbnail: "/thumbs/hi-playing-with-motions.webp",
+    videoUrl: "https://youtu.be/pOoYfs56vnQ",
+    aspect: "16:9",
+  },
+  {
+    slug: "motion-editor-showcase",
+    title: "Video Editor Motion Showcase",
+    client: "Motion study",
+    type: "concept",
+    format: "motion",
+    language: "English",
+    year: "2026",
+    description:
+      "A personal motion showcase created to demonstrate editing rhythm, movement and graphic polish.",
+    role: ["Motion design", "Editing", "Sound"],
+    thumbnail: "/thumbs/raed-masri-video-editor.webp",
+    videoUrl: "https://youtu.be/ZPWPol3PqFw",
+    aspect: "16:9",
+    featured: true,
+  }
+];
+
+export const featuredProjects = projects.filter((project) => project.featured);
+
+export function getProjectsByFormat(format: ProjectFormat) {
+  return projects.filter((project) => project.format === format);
+}
+
+export function getProject(slug: string) {
+  return projects.find((project) => project.slug === slug);
+}
