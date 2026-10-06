@@ -1,0 +1,46 @@
+[
+  {
+    "id": "midnight-studios",
+    "name": "Midnight Studios",
+    "kind": "brand",
+    "image": "/clients/midnight-studios.webp",
+    "url": "https://www.midnightstudios.app/",
+    "showInHero": true,
+    "showInMarquee": true,
+    "published": true,
+    "sortOrder": 10
+  },
+  {
+    "id": "dr-kenza-alami",
+    "name": "Dr. Kenza Alami",
+    "kind": "creator",
+    "image": "/clients/dr-kenza.webp",
+    "url": "",
+    "showInHero": true,
+    "showInMarquee": true,
+    "published": true,
+    "sortOrder": 20
+  },
+  {
+    "id": "scent-council",
+    "name": "Scent Council",
+    "kind": "brand",
+    "image": "/clients/scent-council.webp",
+    "url": "",
+    "showInHero": true,
+    "showInMarquee": true,
+    "published": true,
+    "sortOrder": 30
+  },
+  {
+    "id": "ishi-vision",
+    "name": "Ishi Vision",
+    "kind": "agency",
+    "image": "/clients/ishivision.webp",
+    "url": "https://www.instagram.com/ishivision/",
+    "showInHero": true,
+    "showInMarquee": true,
+    "published": true,
+    "sortOrder": 40
+  }
+]

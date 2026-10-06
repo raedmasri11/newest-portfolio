@@ -13,6 +13,7 @@ import { CalendarIcon } from "@/components/CalendarIcon";
 import { PerformanceGauge } from "@/components/PerformanceGauge";
 import { featuredProjects, projects } from "@/data/projects";
 import { testimonials } from "@/data/testimonials";
+import { heroClients, marqueeClients } from "@/data/clients";
 import { site } from "@/data/site";
 
 export const metadata: Metadata = { alternates: { canonical: "/" } };
@@ -77,7 +78,6 @@ const portfolioProjects = [
   ...projects.filter((project) => !project.featured),
 ];
 
-const marquee = ["Dr. Kenza Alami", "Scent Council", "Ishi Vision", "Midnight Studios"] as const;
 
 export default function Home() {
   return (
@@ -99,10 +99,9 @@ export default function Home() {
           <Reveal delay={0.32}>
             <div className="hero-proof">
               <div className="proof-avatars" aria-label="Selected clients">
-                <i><Image src="/clients/midnight-studios.webp" alt="Midnight Studios" width={40} height={40} /></i>
-                <i><Image src="/clients/dr-kenza.webp" alt="Dr. Kenza Alami" width={40} height={40} /></i>
-                <i><Image src="/clients/scent-council.webp" alt="Scent Council" width={40} height={40} /></i>
-                <i><Image src="/clients/ishivision.webp" alt="Ishi Vision" width={40} height={40} /></i>
+                {heroClients.map((client) => (
+                  <i key={client.id}><Image src={client.image!} alt={client.name} width={40} height={40} /></i>
+                ))}
               </div>
               <p><strong>Trusted by creators, brands &amp; agencies.</strong><span>Real client work + clearly labeled skill studies.</span></p>
             </div>
@@ -116,9 +115,9 @@ export default function Home() {
           <span className="proof-label">Client work for</span>
           <div className="client-marquee">
             <div className="client-track">
-              {[...marquee, ...marquee].map((client, index) => (
-                <span key={`${client}-${index}`} aria-hidden={index >= marquee.length}>
-                  {client}
+              {[...marqueeClients, ...marqueeClients].map((client, index) => (
+                <span key={`${client.id}-${index}`} aria-hidden={index >= marqueeClients.length}>
+                  {client.name}
                 </span>
               ))}
             </div>
@@ -127,7 +126,7 @@ export default function Home() {
       </section>
 
       <section className="stats page-container" aria-label="Portfolio facts">
-        <Reveal><div className="stat"><strong>4</strong><span>client brands featured in this portfolio</span></div></Reveal>
+        <Reveal><div className="stat"><strong>{marqueeClients.length}</strong><span>client brands featured in this portfolio</span></div></Reveal>
         <Reveal delay={.05}><div className="stat"><strong>2+</strong><span>years focused on video editing</span></div></Reveal>
         <Reveal delay={.1}><div className="stat"><strong>3</strong><span>languages spoken: AR · EN · FR</span></div></Reveal>
       </section>

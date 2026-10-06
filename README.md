@@ -267,3 +267,50 @@ For local testing, keep your `.env.local` in the project root, restart `npm run 
 ## v2.4.14 — client-focused copy optimization
 
 This version applies the targeted copy changes justified by the 30-site conversion-copy research audit. Strong existing copy is intentionally preserved; only weak, overly editor-focused, defensive, or unsupported-outcome language was refined. No layout, styling, routing, interaction, or architecture changes were intended.
+
+## v2.4.25 — Private portfolio dashboard
+
+A private `/admin` content dashboard is included for managing the portfolio without editing source code manually. It is intentionally GitHub-backed: dashboard saves commit structured JSON and uploaded images to the existing repository, and the existing Netlify Git integration deploys those changes automatically.
+
+### What can be managed
+
+- **Projects:** title, client/creator, EN/AR language, Long-form/Short-form/Motion format, client/concept/test classification, cover image, video/external URLs, description, roles, aspect ratio, year, duration, homepage featured status, coming-soon state, draft/published state and display order.
+- **Clients & creators:** name, type, profile image/logo, URL, whether the profile appears in the hero profile row, whether the name appears in the “Client work for” marquee, draft/published state and order.
+- **Testimonials:** feedback text, client name/role, company, draft/published state and display order.
+
+The existing public portfolio visuals are preserved. Existing data was migrated into `src/data/content/projects.json`, `clients.json` and `testimonials.json`; the public components now read those files through the same typed data modules.
+
+### One-time production setup
+
+Add these **private** environment variables in Netlify → Project configuration → Environment variables:
+
+```env
+ADMIN_PASSWORD="choose-a-strong-private-password"
+ADMIN_SESSION_SECRET="a-random-secret-at-least-32-characters-long"
+GITHUB_CMS_TOKEN="github-fine-grained-token"
+GITHUB_CMS_OWNER="raedmasri11"
+GITHUB_CMS_REPO="newest-portfolio"
+GITHUB_CMS_BRANCH="main"
+```
+
+For `GITHUB_CMS_TOKEN`, create a **fine-grained GitHub personal access token** restricted to the `newest-portfolio` repository, with repository permission **Contents: Read and write**. Do not expose this token in client code and do not prefix it with `NEXT_PUBLIC_`.
+
+After adding the variables, trigger one Netlify redeploy. Then open:
+
+```text
+https://raedmasri.me/admin
+```
+
+Sign in with `ADMIN_PASSWORD`. Saving an item commits the corresponding content JSON to GitHub. Uploading a cover/profile image commits it under `public/uploads/`. GitHub then triggers the normal Netlify deployment.
+
+### Security notes
+
+- `/admin` is protected by an HttpOnly, SameSite=Strict session cookie derived from `ADMIN_SESSION_SECRET`.
+- Admin API routes require that session as well.
+- The dashboard is marked `noindex`, and `/admin` plus `/api/admin` are disallowed in `robots.txt`.
+- Dashboard secrets remain server-side only.
+- Image uploads accept JPG, PNG, WEBP or GIF and are limited to 5 MB per image.
+
+### Publishing behavior
+
+The dashboard writes to GitHub rather than directly to Netlify's immutable runtime filesystem. This keeps content versioned, makes every change reversible in Git history, and works with the existing Netlify auto-deploy flow. A saved change is not visible on the public site until the triggered Netlify deployment finishes.
