@@ -388,6 +388,8 @@
     "thumbnail": "/thumbs/joseph-high-retention.png",
     "videoUrl": "https://youtube.com/shorts/6A_yA-L0hLk?feature=share",
     "aspect": "9:16",
+    "featured": true,
+    "comingSoon": false,
     "published": true,
     "sortOrder": 180
   },
