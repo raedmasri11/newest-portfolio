@@ -281,7 +281,8 @@
     "thumbnail": "/thumbs/scent-council-reel.webp",
     "externalUrl": "https://www.instagram.com/p/Dc3Uo0aueUo/",
     "aspect": "9:16",
-    "featured": true,
+    "featured": false,
+    "comingSoon": false,
     "published": true,
     "sortOrder": 130
   },
