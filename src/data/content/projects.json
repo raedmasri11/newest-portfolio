@@ -83,6 +83,8 @@
     "thumbnail": "/thumbs/magnatesmedia.webp",
     "videoUrl": "https://youtu.be/HoCuOTET3kE",
     "aspect": "16:9",
+    "featured": true,
+    "comingSoon": false,
     "published": true,
     "sortOrder": 40
   },
