@@ -367,6 +367,8 @@
     "thumbnail": "/thumbs/joseph.webp",
     "videoUrl": "https://youtube.com/shorts/gV1Olh0LW4k",
     "aspect": "9:16",
+    "featured": true,
+    "comingSoon": false,
     "published": true,
     "sortOrder": 170
   },
